@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dome.mapper.MUserMapper">
+    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MUser">
+        <result column="user_id" jdbcType="INTEGER" property="user_id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="passswords" jdbcType="VARCHAR" property="passswords"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="QQ" jdbcType="VARCHAR" property="QQ"/>
+        <result column="school" jdbcType="VARCHAR" property="school"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="regoin" jdbcType="VARCHAR" property="regoin"/>
+        <result column="question_one" jdbcType="INTEGER" property="question_one"/>
+        <result column="answer_one" jdbcType="VARCHAR" property="answer_one"/>
+        <result column="question_two" jdbcType="INTEGER" property="question_two"/>
+        <result column="answer_two" jdbcType="VARCHAR" property="answer_two"/>
+        <result column="create_time" jdbcType="INTEGER" property="create_time"/>
+        <result column="update_time" jdbcType="INTEGER" property="update_time"/>
+    </resultMap>
+
+    <insert id="inserts" parameterType="com.example.dome.entity.model.MUser" useGeneratedKeys="true"
+            keyProperty="user_id" keyColumn="user_id">
+
+        insert into shopping_user (user_id,username,password,passwords,address,phone,email,
+        QQ,school,age,grade,province,city,regoin,question_one,answer_one,
+       question_two,answer_two,create_time,update_time)
+        values (#{feedbackId,jdbcType=INTEGER},
+        #{content,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MUser" useGeneratedKeys="true"
+            keyProperty="user_id" keyColumn="user_id">
+        insert into shopping_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="passwords != null">
+                passwords,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="QQ != null">
+                QQ,
+            </if>
+            <if test="school != null">
+                school,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="regoin != null">
+                regoin,
+            </if>
+            <if test="question_one != null">
+                question_one,
+            </if>
+            <if test="answer_one != null">
+                answer_one,
+            </if>
+            <if test="question_two != null">
+                question_two,
+            </if>
+            <if test="answer_two != null">
+                answer_two,
+            </if>
+            <if test="create_time != null">
+                create_time,
+            </if>
+            <if test="update_time != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">
+                #{user_id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="passwords != null">
+                #{passwords,jdbcType=VARCHAR},
+            </if>
+            <if test="adress != null">
+                #{adress,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="QQ != null">
+                #{QQ,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null">
+                #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="regoin != null">
+                #{regoin,jdbcType=VARCHAR},
+            </if>
+            <if test="question_one != null">
+                #{question_one,jdbcType=VARCHAR},
+            </if>
+            <if test="answer_one != null">
+                #{answer_one,jdbcType=VARCHAR},
+            </if>
+            <if test="question_two != null">
+                #{question_two,jdbcType=VARCHAR},
+            </if>
+            <if test="answer_two != null">
+                #{answer_two,jdbcType=VARCHAR},
+            </if>
+            <if test="create_time != null">
+                #{create_time,jdbcType=INTEGER},
+            </if>
+            <if test="update_time != null">
+                #{update_time,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectUser" resultMap="BaseResultMap">
+        select *  from shopping_user where username =#{username}
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select *  from shopping_user where user_id =#{user_id}
+    </select>
+
+    <select id="login" resultMap="BaseResultMap">
+        select *  from shopping_user where username =#{username} and password=#{password}
+    </select>
+
+</mapper>

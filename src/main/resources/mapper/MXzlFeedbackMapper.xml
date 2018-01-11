@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dome.mapper.MFeedbackMapper">
+    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MFeedback">
+        <result column="feedback_id" jdbcType="INTEGER" property="feedback_id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="create_time" jdbcType="INTEGER" property="create_time"/>
+    </resultMap>
+
+
+
+    <resultMap id="BaseResultMap1" type="com.example.dome.entity.response.SCount">
+        <result column="count" jdbcType="INTEGER" property="count"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.dome.entity.model.MFeedback" useGeneratedKeys="true"
+            keyProperty="feedback_id" keyColumn="feedback_id">
+
+        insert into shopping_feedback (feedback_id,
+        content,phone, create_time)
+        values (#{feedbackId,jdbcType=INTEGER},
+        #{content,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MFeedback" useGeneratedKeys="true"
+            keyProperty="feedback_id" keyColumn="feedback_id">
+        insert into shopping_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feedback_id != null">
+                feedback_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="create_time != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feedback_id != null">
+                #{feedback_id,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="create_time != null">
+                #{create_time,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="feedbackList" resultMap="BaseResultMap" parameterType="map">
+        select * from shopping_feedback ORDER by create_time DESC
+        <if test="map.page!=null and map.page_limit!=null">
+            limit #{map.page},#{map.page_limit}
+        </if>
+    </select>
+
+    <select id="FeedbackListCount" resultMap="BaseResultMap1">
+        select count(*) as count from shopping_feedback
+    </select>
+
+</mapper>

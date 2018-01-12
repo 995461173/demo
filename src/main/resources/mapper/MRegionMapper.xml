@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dome.mapper.MRegionMapper">
+    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MRegion">
+
+        <result column="region_id" jdbcType="INTEGER" property="region_id"/>
+        <result column="region_code" jdbcType="CHAR" property="region_code"/>
+        <result column="region_name" jdbcType="VARCHAR" property="region_name"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parent_id"/>
+        <result column="region_level" jdbcType="INTEGER" property="region_level"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="short_name" jdbcType="VARCHAR" property="short_name"/>
+        <result column="end_flag" jdbcType="TINYINT" property="end_flag"/>
+        <result column="update_time" jdbcType="INTEGER" property="update_time"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.example.dome.entity.model.MRegion">
+
+        insert into shopping_region (region_id, region_code, region_name,
+        parent_id, region_level, sort,
+        short_name, end_flag, update_time
+        )
+        values (#{region_id,jdbcType=INTEGER}, #{region_code,jdbcType=CHAR}, #{region_name,jdbcType=VARCHAR},
+        #{parent_id,jdbcType=INTEGER}, #{region_level,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
+        #{short_name,jdbcType=VARCHAR}, #{end_flag,jdbcType=TINYINT}, #{update_time,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MRegion">
+
+        insert into shopping_region
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region_id != null">
+                region_id,
+            </if>
+            <if test="region_code != null">
+                region_code,
+            </if>
+            <if test="region_name != null">
+                region_name,
+            </if>
+            <if test="parent_id != null">
+                parent_id,
+            </if>
+            <if test="region_level != null">
+                region_level,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="short_name != null">
+                short_name,
+            </if>
+            <if test="end_flag != null">
+                end_flag,
+            </if>
+            <if test="update_time != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region_id != null">
+                #{region_id,jdbcType=INTEGER},
+            </if>
+            <if test="region_code != null">
+                #{region_code,jdbcType=CHAR},
+            </if>
+            <if test="region_name != null">
+                #{region_name,jdbcType=VARCHAR},
+            </if>
+            <if test="parent_id != null">
+                #{parent_id,jdbcType=INTEGER},
+            </if>
+            <if test="region_level != null">
+                #{region_level,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="short_name != null">
+                #{short_name,jdbcType=VARCHAR},
+            </if>
+            <if test="end_flag != null">
+                #{end_flag,jdbcType=TINYINT},
+            </if>
+            <if test="update_time != null">
+                #{update_time,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getProvinceList" resultMap="BaseResultMap">
+      SELECT * FROM shopping_region WHERE region_level=1;
+    </select>
+
+    <select id="getCityListByParentId" parameterType="int" resultMap="BaseResultMap">
+      SELECT * FROM shopping_region WHERE region_level=2 AND parent_id=#{parent_id};
+    </select>
+
+    <select id="getAllCity" resultMap="BaseResultMap">
+      SELECT * FROM shopping_region where region_level&lt;=2;
+    </select>
+
+    <select id="getProviceByName" resultMap="BaseResultMap">
+      select * from shopping_region where region_name  =#{region_name} and region_level = 1
+    </select>
+
+    <select id="getCityByName" resultMap="BaseResultMap">
+        select * from shopping_region where region_name  =#{region_name} and region_level = 2
+    </select>
+
+</mapper>

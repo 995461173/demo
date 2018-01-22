@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * Created by huangxiaoliang on 2017/7/12.
+ * Created by lenovo on 2018/1/9.
  */
 @ApiModel
 public class SCount implements Serializable {

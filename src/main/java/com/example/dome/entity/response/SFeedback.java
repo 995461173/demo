@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-
+/**
+ * Created by lenovo on 2018/1/9.
+ */
 @ApiModel
 public class SFeedback implements Serializable {
 

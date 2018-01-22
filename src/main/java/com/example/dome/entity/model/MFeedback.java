@@ -4,7 +4,9 @@ package com.example.dome.entity.model;
 import com.baomidou.mybatisplus.activerecord.Model;
 
 import java.io.Serializable;
-
+/**
+ * Created by lenovo on 2018/1/9.
+ */
 public class MFeedback extends Model<MFeedback> implements Serializable {
 
     private Long feedback_id;

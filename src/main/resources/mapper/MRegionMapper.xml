@@ -13,17 +13,16 @@
         <result column="end_flag" jdbcType="TINYINT" property="end_flag"/>
         <result column="update_time" jdbcType="INTEGER" property="update_time"/>
     </resultMap>
+
     <insert id="insert" parameterType="com.example.dome.entity.model.MRegion">
 
         insert into shopping_region (region_id, region_code, region_name,
-        parent_id, region_level, sort,
-        short_name, end_flag, update_time
-        )
+        parent_id, region_level, sort,short_name, end_flag, update_time)
         values (#{region_id,jdbcType=INTEGER}, #{region_code,jdbcType=CHAR}, #{region_name,jdbcType=VARCHAR},
         #{parent_id,jdbcType=INTEGER}, #{region_level,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
-        #{short_name,jdbcType=VARCHAR}, #{end_flag,jdbcType=TINYINT}, #{update_time,jdbcType=INTEGER}
-        )
-    </insert>
+        #{short_name,jdbcType=VARCHAR}, #{end_flag,jdbcType=TINYINT}, #{update_time,jdbcType=INTEGER})
+</insert>
+
     <insert id="insertSelective" parameterType="com.example.dome.entity.model.MRegion">
 
         insert into shopping_region
@@ -104,7 +103,7 @@
     </select>
 
     <select id="getCityByName" resultMap="BaseResultMap">
-        select * from shopping_region where region_name  =#{region_name} and region_level = 2
+      select * from shopping_region where region_name  =#{region_name} and region_level = 2
     </select>
 
 </mapper>

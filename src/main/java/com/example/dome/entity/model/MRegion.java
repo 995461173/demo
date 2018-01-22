@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Created by lenovo on 2018/1/9.
+ */
 public class MRegion extends Model<MRegion> implements Serializable {
 
     private Integer region_id;

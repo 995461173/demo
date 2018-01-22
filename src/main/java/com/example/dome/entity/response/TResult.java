@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * Created by jclang on 2017/6/2.
+ * Created by lenovo on 2018/1/9.
  */
 @ApiModel
 public class TResult<T extends Object> implements Serializable {

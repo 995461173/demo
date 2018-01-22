@@ -5,10 +5,7 @@ import com.example.dome.entity.response.SUser;
 import com.example.dome.entity.response.TResult;
 import com.example.dome.service.IUserService;
 import com.example.dome.statconst.C;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +17,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/dome/user")
+@Api(value = "user", description = "用户相关接口", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Autowired

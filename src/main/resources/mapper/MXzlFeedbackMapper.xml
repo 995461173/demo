@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dome.mapper.MFeedbackMapper">
-    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MFeedback">
+<mapper namespace="com.example.demo.mapper.MFeedbackMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.model.MFeedback">
         <result column="feedback_id" jdbcType="INTEGER" property="feedback_id"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
@@ -10,11 +10,11 @@
 
 
 
-    <resultMap id="BaseResultMap1" type="com.example.dome.entity.response.SCount">
+    <resultMap id="BaseResultMap1" type="com.example.demo.entity.response.SCount">
         <result column="count" jdbcType="INTEGER" property="count"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.example.dome.entity.model.MFeedback" useGeneratedKeys="true"
+    <insert id="insert" parameterType="com.example.demo.entity.model.MFeedback" useGeneratedKeys="true"
             keyProperty="feedback_id" keyColumn="feedback_id">
 
         insert into shopping_feedback (feedback_id,
@@ -23,7 +23,7 @@
         #{content,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MFeedback" useGeneratedKeys="true"
+    <insert id="insertSelective" parameterType="com.example.demo.entity.model.MFeedback" useGeneratedKeys="true"
             keyProperty="feedback_id" keyColumn="feedback_id">
         insert into shopping_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">

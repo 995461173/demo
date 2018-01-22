@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dome.mapper.MUserMapper">
-    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MUser">
+<mapper namespace="com.example.demo.mapper.MUserMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.model.MUser">
         <result column="user_id" jdbcType="INTEGER" property="user_id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -24,7 +24,7 @@
         <result column="update_time" jdbcType="INTEGER" property="update_time"/>
     </resultMap>
 
-    <insert id="inserts" parameterType="com.example.dome.entity.model.MUser" useGeneratedKeys="true"
+    <insert id="inserts" parameterType="com.example.demo.entity.model.MUser" useGeneratedKeys="true"
             keyProperty="user_id" keyColumn="user_id">
 
         insert into shopping_user (user_id,username,password,passwords,address,phone,email,
@@ -34,7 +34,7 @@
         #{content,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MUser" useGeneratedKeys="true"
+    <insert id="insertSelective" parameterType="com.example.demo.entity.model.MUser" useGeneratedKeys="true"
             keyProperty="user_id" keyColumn="user_id">
         insert into shopping_user
         <trim prefix="(" suffix=")" suffixOverrides=",">

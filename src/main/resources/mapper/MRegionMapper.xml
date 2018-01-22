@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dome.mapper.MRegionMapper">
-    <resultMap id="BaseResultMap" type="com.example.dome.entity.model.MRegion">
+<mapper namespace="com.example.demo.mapper.MRegionMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.model.MRegion">
 
         <result column="region_id" jdbcType="INTEGER" property="region_id"/>
         <result column="region_code" jdbcType="CHAR" property="region_code"/>
@@ -14,7 +14,7 @@
         <result column="update_time" jdbcType="INTEGER" property="update_time"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.example.dome.entity.model.MRegion">
+    <insert id="insert" parameterType="com.example.demo.entity.model.MRegion">
 
         insert into shopping_region (region_id, region_code, region_name,
         parent_id, region_level, sort,short_name, end_flag, update_time)
@@ -23,7 +23,7 @@
         #{short_name,jdbcType=VARCHAR}, #{end_flag,jdbcType=TINYINT}, #{update_time,jdbcType=INTEGER})
 </insert>
 
-    <insert id="insertSelective" parameterType="com.example.dome.entity.model.MRegion">
+    <insert id="insertSelective" parameterType="com.example.demo.entity.model.MRegion">
 
         insert into shopping_region
         <trim prefix="(" suffix=")" suffixOverrides=",">

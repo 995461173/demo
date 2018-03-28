@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/demo/region")
+@RequestMapping("/oa/v1/region")
 @Api(value = "region", description = "地区相关接口", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegionController {
 

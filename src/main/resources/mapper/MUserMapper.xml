@@ -175,4 +175,18 @@
         select *  from shopping_user where username =#{username} and password=#{password}
     </select>
 
+    <select id="selectList" resultMap="BaseResultMap">
+        select user.*,( select count(1)  from shopping_user user where 1=1
+        <if test="username!=null and username!=null">
+            and  username like '%${username}%'
+        </if>) as counts  from shopping_user user where 1=1
+        <if test="username!=null and username!=null">
+            and  username like '%${username}%'
+        </if>
+         ORDER by create_time DESC
+        <if test="map.page!=null and map.page_limit!=null">
+            limit #{map.page},#{map.page_limit}
+        </if>
+    </select>
+
 </mapper>

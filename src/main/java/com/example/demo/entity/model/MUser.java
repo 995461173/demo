@@ -51,7 +51,24 @@ public class MUser extends Model<MUser> implements Serializable {
     private Long create_time;
     @ApiModelProperty(name = "update_time", value = "更新时间 ", required = true)
     private Long update_time;
+    private String session_id;
+    private Long session_expire_time;
 
+    public String getSession_id() {
+        return session_id;
+    }
+
+    public void setSession_id(String session_id) {
+        this.session_id = session_id;
+    }
+
+    public Long getSession_expire_time() {
+        return session_expire_time;
+    }
+
+    public void setSession_expire_time(Long session_expire_time) {
+        this.session_expire_time = session_expire_time;
+    }
 
     private static final long serialVersionUID = 1L;
 

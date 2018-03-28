@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/demo/feedback")
+@RequestMapping("/oa/v1/feedback")
 @Api(value = "feedback", description = "写字楼反馈接口", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FeedbackController {
 
     @Autowired
-    private IFeedbackService xzlFeedbackService;
+    private IFeedbackService feedbackService;
 
     @PostMapping(value = "/add")
     @ApiOperation(value = "用户反馈", notes = "用户反馈", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,7 +36,7 @@ public class FeedbackController {
         mXzlFeedback.setContent(sXzlFeedback.getContent());
         mXzlFeedback.setPhone(sXzlFeedback.getPhone());
         mXzlFeedback.setCreate_time(System.currentTimeMillis() / 1000);
-        if (xzlFeedbackService.insertSelective(mXzlFeedback) > 0) {
+        if (feedbackService.insertSelective(mXzlFeedback) > 0) {
             return new TResult(0, null, mXzlFeedback);
         } else {
             return new TResult(C.ERROR_CODE_REQUEST_FAIL, C.ERROR_MSG_REQUEST_FAIL, null);
@@ -53,7 +53,7 @@ public class FeedbackController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("page", (page - 1) * (page_limit));
         map.put("page_limit", page_limit);
-        List<MFeedback> mOfficeFeedback = xzlFeedbackService.feedbackList(map);
+        List<MFeedback> mOfficeFeedback = feedbackService.feedbackList(map);
         return new TResult(0, null, mOfficeFeedback);
     }
 
@@ -64,7 +64,7 @@ public class FeedbackController {
             @ApiResponse(code = C.ERROR_CODE_INVALID_PARAM, message = C.ERROR_MSG_INVALID_PARAM),
             @ApiResponse(code = C.ERROR_CODE_REQUEST_FAIL, message = C.ERROR_MSG_REQUEST_FAIL)})
     public TResult<SCount> getListCount() {
-        SCount count = xzlFeedbackService.FeedbackListCount();
+        SCount count = feedbackService.FeedbackListCount();
         return new TResult<>(0, count.getCount() + "", count);
     }
 

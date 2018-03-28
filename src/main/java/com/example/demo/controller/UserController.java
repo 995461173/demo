@@ -11,12 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lenovo on 2018/1/9.
  */
 @RestController
-@RequestMapping("/demo/user")
+@RequestMapping("/oa/v1/user")
 @Api(value = "user", description = "用户相关接口", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
@@ -76,12 +79,32 @@ public class UserController {
             @ApiResponse(code = C.ERROR_CODE_INVALID_PARAM, message = C.ERROR_MSG_INVALID_PARAM),
             @ApiResponse(code = C.ERROR_CODE_REQUEST_FAIL, message = C.ERROR_MSG_REQUEST_FAIL)})
     public TResult<MUser> login(@ApiParam(name = "username", value = "用户名", required = true) String username,
-                                @ApiParam(name = "password" , value = "密码", required = true) String password) {
-        MUser mUser = userService.login(username,password);
-        if(mUser != null){
+                                @ApiParam(name = "password", value = "密码", required = true) String password) {
+        MUser mUser = userService.login(username, password);
+        if (mUser != null) {
             return new TResult(0, null, mUser);
         }
-        return new TResult(0, "账号或密码错误", null);
+        return new TResult(C.ERROR_CODE_REQUEST_FAIL, C.ERROR_MSG_REQUEST_FAIL, null);
+    }
+
+    @GetMapping(value = "/list")
+    @ApiOperation(value = "用户列表", notes = "用户列表", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {@ApiResponse(code = 0, message = "成功返回"),
+            @ApiResponse(code = 403, message = "没有权限访问接口", response = String.class),
+            @ApiResponse(code = C.ERROR_CODE_INVALID_PARAM, message = C.ERROR_MSG_INVALID_PARAM),
+            @ApiResponse(code = C.ERROR_CODE_REQUEST_FAIL, message = C.ERROR_MSG_REQUEST_FAIL)})
+    public TResult<MUser> selectList(
+            @ApiParam(name = "page", value = "当前页码", required = true) int page,
+            @ApiParam(name = "page_limit", value = "每页条数", required = true) int page_limit,
+            @ApiParam(name = "username", value = "用户名", required = true) String username) {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("page", (page - 1) * (page_limit));
+        map.put("page_limit", page_limit);
+
+        List<MUser> mUserList = userService.selectList(map,username);
+
+        return new TResult(0, null, mUserList);
     }
 
 }

@@ -1,10 +1,8 @@
 package com.example.demo.util;
 
+import com.example.demo.statconst.C;
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
-import org.apache.commons.codec.Charsets;
-import org.apache.commons.lang.StringUtils;
-
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.PrintWriter;
@@ -18,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by lenovo on 2018/1/9.
@@ -33,6 +32,22 @@ public class StringUtil {
         } else {
             return false;
         }
+    }
+    public static boolean checkAdminApiPathNeedAuth(String apiPath) {
+        for (String rule : C.AUTH_ADMIN_API_PATH) {
+            if (Pattern.compile(rule).matcher(apiPath).find()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean checkAdminApiPathPass(String apiPath) {
+        for (String rule : C.API_PASS_WEB) {
+            if (Pattern.compile(rule).matcher(apiPath).find()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String getRandomSMS() {
@@ -154,7 +169,7 @@ public class StringUtil {
     }
 
     public static String md5(String content) {
-        return Hashing.md5().newHasher().putString(content, Charsets.UTF_8).hash().toString().toLowerCase();
+        return Hashing.md5().newHasher().putString(content, com.google.common.base.Charsets.UTF_8).hash().toString().toLowerCase();
     }
 
     public static boolean checkPicFormat(String format) {
@@ -189,23 +204,45 @@ public class StringUtil {
             if ("jpg".equals(format.toLowerCase())) {
                 return true;
             }
+            if ("gif".equals(format.toLowerCase())) {
+                return true;
+            }
+
         }
         return false;
     }
 
     public static boolean checkVoiceFormat(String format) {
         if (format != null) {
-            if ("mp3".equals(format.toLowerCase())) {
+            if ("mp4".equals(format.toLowerCase())) {
                 return true;
             }
-            if ("wma".equals(format.toLowerCase())) {
+            if ("doc".equals(format.toLowerCase())) {
                 return true;
             }
-            if ("wav".equals(format.toLowerCase())) {
+            if ("excel".equals(format.toLowerCase())) {
                 return true;
             }
-            if ("amr".equals(format.toLowerCase())) {
+            if ("ppt".equals(format.toLowerCase())) {
                 return true;
+            }
+            if("jpg".equals(format.toLowerCase())){
+                return  true;
+            }
+            if("gif".equals(format.toLowerCase())){
+                return  true;
+            }
+            if("png".equals(format.toLowerCase())){
+                return  true;
+            }
+            if("txt".equals(format.toLowerCase())){
+                return  true;
+            }
+            if("pdf".equals(format.toLowerCase())){
+                return  true;
+            }
+            if("bpm".equals(format.toLowerCase())){
+                return  true;
             }
         }
         return false;
@@ -294,17 +331,6 @@ public class StringUtil {
         }
     }
 
-    public static boolean checkArrayContainContent(String arr[], String content) {
-        if (arr != null && content != null) {
-            int count = arr.length;
-            for (int i = 0; i < count; i++) {
-                if (StringUtils.equals(content, arr[i])) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     /**
      * 获取日期年份
